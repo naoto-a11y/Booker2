@@ -7,4 +7,7 @@
   <% if @book.user == current_user %>
     <%= link_to "Destroy", book_path(@book.id), method: :delete %>
   <% end %>
+  <% if @book.user == current_user %>
+    <%= link_to "update", edit_book_path(@book.id) %>
+  <% end %>
 </div>
