@@ -6,8 +6,13 @@ class BooksController < ApplicationController
   def create 
     @book = Book.new(book_params)
     @book.user_id = current_user.id
-    @book.save
-    redirect_to new_book_path
+
+    if @book.save
+      flash[:notice] = "投稿に成功しました。"
+      redirect_to new_book_path
+    else
+      redirect_to new_book_path
+    end
   end
 
   def index
@@ -23,6 +28,7 @@ class BooksController < ApplicationController
     book.destroy
     redirect_to books_path
   end
+
 
   private
 
