@@ -1,3 +1,11 @@
+<div>
+  <%= image_tag @user.get_profile_image %>
+  <h3>name: <%= @user.name %></h3>
+  <h3>introduction: <%= @user.introduction %></h3>
+  <p><%= link_to "プロフィール編集", edit_user_path(@user.id) %></p>
+</div>
+
+
 <% @books.each do |book| %>
   <div>
     <p>Title:<%= link_to book_path(book.id) do %>
@@ -6,4 +14,24 @@
     <p>Opinion: <%= book.body %></p>
     <p>User: <%= book.user.name %></p>
   </div>
+<% end %>
+
+<h1>画像投稿フォーム</h1>
+
+<%= flash[:notice] %>
+<% if @book.errors.any? %>
+  <%= @book.errors.count %>件のエラー発生
+  <ul>
+    <% @book.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_with model: @book do |f| %>
+  <h4>Title</h4>
+  <%= f.text_field :title %>
+  <h4>Opinion</h4>
+  <%= f.text_area :body %>
+  <%= f.submit 'Create Book' %>
 <% end %>
