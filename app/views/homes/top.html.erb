@@ -1,2 +1,27 @@
-<p><%= link_to "sign in", new_user_session_path %></p>
-<p><%= link_to "sign up", new_user_registration_path %></p>
+<main>
+  
+  <div class="container my-5">
+    <div class="row d-flex justify-content-center">
+      <div class="col-6">
+        <div class="text-align: left;">
+          <h1>wlcomw to <i class="fa-solid fa-book"></i>Bookers!!</h1>
+          <p>In <i class="fa-solid fa-book"></i>Bookers,</p>
+          <p>you can share and exchange your opinions , inpressions , and emotions</p>
+          <p>about various books!</p>
+        </div>
+        <div class="col d-flex flex-column text-center">
+          <button class="btn btn-info mb-3 " onclick="window.location.href='<%= new_user_session_path %>'">sign in</button>
+          <button class="btn btn-success" onclick="window.location.href='<%= new_user_registration_path %>'">sign up</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+
+
+
+
+
+
+
