@@ -6,7 +6,7 @@ class BooksController < ApplicationController
 
     if @book.save
       flash[:notice] = "Successful"
-      redirect_to books_path
+      redirect_to book_path(@book.id)
     else
       render :index
     end
@@ -19,7 +19,9 @@ class BooksController < ApplicationController
   end
 
   def show
-    @book = Book.find(params[:id])
+    @book = Book.new
+    @bookshow = Book.find(params[:id])
+    @user = current_user
   end
 
   def destroy
