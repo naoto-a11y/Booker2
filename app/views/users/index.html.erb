@@ -1,7 +1,65 @@
-<% @users.each do |user| %>
-  <div>
-    image: <%= image_tag user.get_profile_image  %>
-    User: <%= user.name %>
-    <%= link_to 'Show', user_path(user.id) %>
+<div class="container">
+  <div class="row mt-3">
+    <div class="col-md-3">
+     
+      <h2>User info</h2>
+      <%= image_tag @user.get_profile_image %></td>
+      <table class="w-100">
+        <tr class="py-5">
+          <th class="border-top py-3">name</th>
+          <td class="border-top py-3"><%= @user.name %></td>
+        </tr>
+        <tr>
+          <th class="border-top py-3">introduction</th>
+          <td class="border-top py-3"><%= @user.introduction %></td>
+        </tr>
+      </table>
+      
+      <button class="btn btn-outline-dark mt-5 mb-3 w-100" onclick="window.location.href='<%= edit_user_path(@user.id) %>'"><i class="fa-solid fa-user-gear"></i></button>
+      
+
+      <div>
+        <h2>New book</h2>
+        <% if @new.errors.any? %>
+          <%= @new.errors.count %>件のエラー発生
+          <ul>
+            <% @new.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        <% end %>
+
+        
+        <%= form_with model: @new do |f| %>
+          <h6 class="py-1">Title</h6>
+            <%= f.text_field :title, class: "form-control" %>
+          <h6 class="mt-3 py-1">Opinion</h6>
+            <%= f.text_area :body, class: "form-control" %>
+          <%= f.submit 'Create Book', class: "btn btn-success mt-3" %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="col-md-8 offset-md-1">
+      <h2>Users</h2>
+      
+      <table class="w-100">
+        <tr class="border-top border-bottom">
+          <th class="py-3 pl-2">image</th>
+          <th class="py-3">name</th>
+          <thclass="py-3" ></th>
+        </tr>
+        <% @users.each do |user| %>
+        <tr class="border-top">
+          <td><%= image_tag user.get_profile_image  %></td>
+          <td><%= user.name %></td>
+          <td><%= link_to 'Show', user_path(user.id) %></td>
+        </tr>
+        <% end %>
+      </table>
+    </div>
   </div>
-<% end %>
+</div>
+
+
+

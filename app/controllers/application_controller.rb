@@ -14,4 +14,8 @@ class ApplicationController < ActionController::Base
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :email])
   end
+
+  def book_params
+    params.require(:book).permit(:title, :body)
+  end
 end
