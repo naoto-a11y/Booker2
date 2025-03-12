@@ -6,17 +6,20 @@ class UsersController < ApplicationController
   end
 
   def edit
+    user = User.find(params[:id])
+    unless user.id == current_user.id
+      redirect_to user_path(current_user)
+    end
     @user = User.find(params[:id])
   end
 
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
-      flash[:notice] = "Successful"
+      flash[:notice] = "You have updated user successfully."
       redirect_to user_path(@user.id)
     else
-      flash[:notice] = "Failure"
-      redirect_to user_path(@user.id)
+      render :edit
     end
   end
 
@@ -27,12 +30,14 @@ class UsersController < ApplicationController
   end
 
   def create
-    @new = Book.new(book_params)
-    @new.user_id = current_user.id
-    if @new.save
-      flash[:notice] = "Successful"
-      redirect_to book_path(@new.id)
+    @book = Book.new(book_params)
+    @book.user_id = current_user.id
+    if @book.save
+      flash[:notice] = "You have created book successfully."
+      redirect_to book_path(@book.id)
     else
+      @books = Book.all
+      @user = current_user
       render :index
     end
   end

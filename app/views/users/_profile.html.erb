@@ -1,0 +1,16 @@
+<h2>User info</h2>
+<%= image_tag user.get_profile_image %>
+<table class="w-100">
+  <tr class="py-5">
+    <th class="border-top py-3">name</th>
+    <td class="border-top py-3"><%= user.name %></td>
+  </tr>
+  <tr>
+    <th class="border-top py-3">introduction</th>
+    <td class="border-top py-3"><%= user.introduction %></td>
+  </tr>
+</table>
+
+<%= link_to edit_user_path(@user.id), class: "btn btn-outline-dark mt-5 mb-3 w-100" do %>
+  <i class="fa-solid fa-user-gear"></i>
+<% end %>
